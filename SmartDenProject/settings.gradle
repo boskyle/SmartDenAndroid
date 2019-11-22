@@ -1,0 +1,2 @@
+include ':app', ':SmartDen'
+rootProject.name='SmartDen'

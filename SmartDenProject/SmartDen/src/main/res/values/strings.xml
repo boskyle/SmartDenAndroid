@@ -14,4 +14,16 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+
+
+
+<!--This array is used for the add sensor selection spinner in the Add_sensor class-->
+
+    <string-array name="list_of_sensors">
+        <item>DHT-11 (Temperature and Humidity Sensor)</item>
+        <item>HC-SR04 (Distance Sensor)</item>
+        <item>YSL-R59(RGB LED)</item>
+        <item>ULN2003 (Motor)</item>
+    </string-array>
+
 </resources>

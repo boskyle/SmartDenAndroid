@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +34,12 @@ public class Registration extends AppCompatActivity {
     /*Connections DB*/
     RequestQueue rq;
     String insertUrl = "http://boswellkyle.com/ceng319_smartden/register_users.php";
+
+
+    /**/
+
+
+
 
     public static boolean isValid(String email)
     {
@@ -47,7 +56,7 @@ public class Registration extends AppCompatActivity {
 
     public static boolean isNameValid(String name)
     {
-        String nameRegex = "[A-Z][a-z]*";
+        String nameRegex = "^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}";
 
         Pattern pat = Pattern.compile(nameRegex);
         if (name == null)
@@ -56,9 +65,10 @@ public class Registration extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
 
         rq = Volley.newRequestQueue(Registration.this);
 
@@ -88,11 +98,11 @@ public class Registration extends AppCompatActivity {
                 final String password_input = password.getText().toString();
 
 
-//                if(isNameValid(name_input) == false)
-//                {
-//                    fullname.requestFocus();
-//                    fullname.setError("Invalid Name");
-//                }
+                if(isNameValid(name_input) == false)
+                {
+                    fullname.requestFocus();
+                    fullname.setError("Invalid Name");
+                }
 
                  if (isValid(email_input) == false) {
                     email.requestFocus();

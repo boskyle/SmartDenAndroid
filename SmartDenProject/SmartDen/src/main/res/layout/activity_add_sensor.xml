@@ -12,6 +12,7 @@
     <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
     <androidx.constraintlayout.widget.ConstraintLayout
 
+        android:id="@+id/as_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,14 +21,14 @@
 
         <Spinner
             android:id="@+id/spn_sensors"
-            android:layout_width="390dp"
-            android:layout_height="115dp"
+            android:layout_width="324dp"
+            android:layout_height="93dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.476"
+            app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.047" />
+            app:layout_constraintVertical_bias="0.155" />
 
         <EditText
             android:id="@+id/et_sensor_code"
@@ -52,6 +53,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.907" />
+
+
+
+        <ImageView
+            android:id="@+id/iv_scan"
+            android:layout_width="62dp"
+            android:layout_height="75dp"
+            android:layout_marginEnd="88dp"
+            android:onClick="cameraScan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.556"
+            app:srcCompat="@android:drawable/ic_menu_camera"/>
 
 
         <!--       Boswel code here   -->

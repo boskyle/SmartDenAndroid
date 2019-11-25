@@ -1,21 +1,29 @@
 package smartden.project;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -26,6 +34,60 @@ public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemS
     Spinner spinner;
     EditText code;
     private DrawerLayout mDrawerLayout;
+
+    ImageView v;
+
+    int CAMERA_PERMISSION_CODE = 1;
+
+    protected void init()
+    {
+        if (ContextCompat.checkSelfPermission(Add_sensor.this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED)
+        {
+            Snackbar.make(findViewById(R.id.as_main),"Camera Permission Granted!",Snackbar.LENGTH_SHORT).show();
+        }
+
+        else {requestCameraPermission();}
+    }
+
+
+protected  void requestCameraPermission ()
+{
+    if (ActivityCompat.shouldShowRequestPermissionRationale(Add_sensor.this,Manifest.permission.CAMERA))
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Add_sensor.this).setTitle("Camera Access Permission Required");
+        AlertDialog d1;
+        builder.setMessage("Can I get permission to access your Camera?");
+        builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which)
+            {
+                /*INVOKE PERMISSION REQ AGAIN*/
+                ActivityCompat.requestPermissions(Add_sensor.this, new String[] {Manifest.permission.CAMERA},CAMERA_PERMISSION_CODE);
+
+            }
+        });
+
+        builder.setNegativeButton("Deny", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        d1 = builder.create();
+        d1.show();
+
+
+    } else
+    {
+        ActivityCompat.requestPermissions(Add_sensor.this, new String[] {Manifest.permission.CAMERA},CAMERA_PERMISSION_CODE);
+    }
+
+
+}
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +103,17 @@ public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemS
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
+
+        v = findViewById(R.id.iv_scan);
+
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    Snackbar.make(findViewById(R.id.as_main),"Scan",Snackbar.LENGTH_SHORT).show();
+                    init();
+            }
+        });
 
 
 
@@ -182,12 +255,14 @@ public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemS
 
 
         }
-
-
-
-
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent)
+    {
 
     }
+
+
+
+
+
 }

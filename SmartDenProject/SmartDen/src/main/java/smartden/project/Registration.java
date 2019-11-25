@@ -47,6 +47,15 @@ public class Registration extends AppCompatActivity {
         return pat.matcher(email).matches();
     }
 
+    public static boolean isNameValid(String name)
+    {
+        String nameRegex = "^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}";
+
+        Pattern pat = Pattern.compile(nameRegex);
+        if (name == null)
+            return false;
+        return pat.matcher(name).matches();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,15 +89,17 @@ public class Registration extends AppCompatActivity {
                 final String password_input = password.getText().toString();
 
 
-                if(name_input.length() == 0)
+                if( isNameValid(name_input) == false)
                 {
                     fullname.requestFocus();
                     fullname.setError("Invalid Name");
                 }
+
                 else if (isValid(email_input) == false) {
                     email.requestFocus();
                     email.setError("Invalid email");
                 }
+
                 else if(password_input.length() <=8)
                 {
                     password.requestFocus();

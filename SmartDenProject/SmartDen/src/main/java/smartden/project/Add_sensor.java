@@ -9,14 +9,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class Add_sensor extends AppCompatActivity {
+public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+
+
+    /*Spinner*/
+
+    Spinner spinner;
+    EditText code;
     private DrawerLayout mDrawerLayout;
-    @Override
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_sensor);
@@ -30,6 +41,9 @@ public class Add_sensor extends AppCompatActivity {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
+
+
+
 
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -74,8 +88,7 @@ public class Add_sensor extends AppCompatActivity {
                                 startActivity(intent);
                                 break;
                             case R.id.add_sensor:
-                                intent = new Intent(Add_sensor.this, Add_sensor.class);
-                                startActivity(intent);
+                                Toast.makeText(Add_sensor.this,"You are already in this activity silly!",Toast.LENGTH_SHORT).show();
                                 break;
                         }
                         return true;
@@ -112,7 +125,28 @@ public class Add_sensor extends AppCompatActivity {
 
 
 
-    }
+        /*Spinner logic*/
+        spinner = (Spinner) findViewById(R.id.spn_sensors);
+        spinner.setOnItemSelectedListener(Add_sensor.this);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Add_sensor.this,R.array.list_of_sensors,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+
+
+
+        /*code et*/
+
+        code = findViewById(R.id.et_sensor_code);
+
+
+
+
+
+    } // end of onCreate
+
+
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -126,5 +160,34 @@ public class Add_sensor extends AppCompatActivity {
 
 
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+    {
+               switch (position)
+               {
+                   case 0:
+                       code.setHint("DHT-11 Code");
+                       break;
 
+                   case 1:
+                       code.setHint("HC-SR04 Code");
+                       break;
+                   case 2:
+                       code.setHint("RGB Code");
+                       break;
+                   case 3:
+                       code.setHint("MOTOR Code");
+                       break;
+               }
+
+
+        }
+
+
+
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

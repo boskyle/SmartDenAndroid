@@ -13,19 +13,22 @@ import java.util.regex.Pattern;
 
 public class Log_in extends AppCompatActivity {
 
-    EditText username;
+    EditText email;
     EditText password;
 
-
-    public static boolean isNameValid(String name)
+    public static boolean isValid(String email)
     {
-        String nameRegex = "^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}";
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
 
-        Pattern pat = Pattern.compile(nameRegex);
-        if (name == null)
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null)
             return false;
-        return pat.matcher(name).matches();
+        return pat.matcher(email).matches();
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,14 +49,14 @@ public class Log_in extends AppCompatActivity {
         final Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                username = (EditText)findViewById(R.id.editText);
+                email= (EditText)findViewById(R.id.editText);
                 password = (EditText)findViewById(R.id.editText2);
                 final String password_input = password.getText().toString();
-                final String username_input = username.getText().toString();
+                final String email_input = email.getText().toString();
 
-                if (isNameValid(username_input) == false) {
-                    username.requestFocus();
-                    username.setError("Invalid Username");
+                if (isValid(email_input) == false) {
+                    email.requestFocus();
+                    email.setError("Invalid Username");
                 }
                 else if(password_input.length() <=8)
                 {

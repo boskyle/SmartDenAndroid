@@ -8,7 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 public class Registration extends AppCompatActivity {
@@ -16,6 +27,10 @@ public class Registration extends AppCompatActivity {
     EditText email;
     EditText password;
     EditText fullname;
+
+    /*Connections DB*/
+    RequestQueue rq;
+    String insertUrl = "http://boswellkyle.com/ceng319_smartden/register_users.php";
 
     public static boolean isValid(String email)
     {
@@ -45,6 +60,9 @@ public class Registration extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
+        rq = Volley.newRequestQueue(Registration.this);
+
+
         TextView tv_reg = (TextView)findViewById(R.id.lnkLogin);
         tv_reg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,12 +88,13 @@ public class Registration extends AppCompatActivity {
                 final String password_input = password.getText().toString();
 
 
-                if(isNameValid(name_input) == false)
-                {
-                    fullname.requestFocus();
-                    fullname.setError("Invalid Name");
-                }
-                else if (isValid(email_input) == false) {
+//                if(isNameValid(name_input) == false)
+//                {
+//                    fullname.requestFocus();
+//                    fullname.setError("Invalid Name");
+//                }
+
+                 if (isValid(email_input) == false) {
                     email.requestFocus();
                     email.setError("Invalid email");
                 }
@@ -86,6 +105,27 @@ public class Registration extends AppCompatActivity {
 
                 }
                 else{
+                    StringRequest req = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            Toast.makeText(Registration.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("email", email.getText().toString());
+                            params.put("password", password.getText().toString());
+                            params.put("fullname", fullname.getText().toString());
+                            return params;
+                        }
+                    };
+                    rq.add(req);
 
                     Intent intent = new Intent(Registration.this, Log_in.class);
                     startActivity(intent);

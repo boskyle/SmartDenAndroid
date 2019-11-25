@@ -17,7 +17,15 @@ public class Log_in extends AppCompatActivity {
     EditText password;
 
 
+    public static boolean isNameValid(String name)
+    {
+        String nameRegex = "[A-Z][a-z]*";
 
+        Pattern pat = Pattern.compile(nameRegex);
+        if (name == null)
+            return false;
+        return pat.matcher(name).matches();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +50,7 @@ public class Log_in extends AppCompatActivity {
                 final String password_input = password.getText().toString();
                 final String username_input = username.getText().toString();
 
-                if (username_input.length() <= 2) {
+                if (isNameValid(username_input) == false) {
                     username.requestFocus();
                     username.setError("Invalid Username");
                 }

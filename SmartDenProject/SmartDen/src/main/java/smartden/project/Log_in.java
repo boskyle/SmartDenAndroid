@@ -19,7 +19,7 @@ public class Log_in extends AppCompatActivity {
 
     public static boolean isNameValid(String name)
     {
-        String nameRegex = "[A-Z][a-z]*";
+        String nameRegex = "^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}";
 
         Pattern pat = Pattern.compile(nameRegex);
         if (name == null)

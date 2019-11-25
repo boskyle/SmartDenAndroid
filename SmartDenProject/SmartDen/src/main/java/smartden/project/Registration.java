@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,9 +18,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -31,9 +27,11 @@ public class Registration extends AppCompatActivity {
     EditText email;
     EditText password;
     EditText fullname;
-    RequestQueue requestqueue;
-    String URL= "https://apollo.humber.ca/~ftgs0002/Register.php";
-    StringRequest request;
+
+    /*Connections DB*/
+    RequestQueue rq;
+    String insertUrl = "http://boswellkyle.com/ceng319_smartden/register_users.php";
+
     public static boolean isValid(String email)
     {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
@@ -49,7 +47,7 @@ public class Registration extends AppCompatActivity {
 
     public static boolean isNameValid(String name)
     {
-        String nameRegex = "^\\p{L}+[\\p{L}\\p{Z}\\p{P}]{0,}";
+        String nameRegex = "[A-Z][a-z]*";
 
         Pattern pat = Pattern.compile(nameRegex);
         if (name == null)
@@ -61,7 +59,10 @@ public class Registration extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        requestqueue = Volley.newRequestQueue(this);
+
+        rq = Volley.newRequestQueue(Registration.this);
+
+
         TextView tv_reg = (TextView)findViewById(R.id.lnkLogin);
         tv_reg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,10 +70,8 @@ public class Registration extends AppCompatActivity {
 
                 Intent intent = new Intent(Registration.this, Log_in.class);
                 startActivity(intent);
-
             }
         });
-
 
         final Button button = findViewById(R.id.button2);
         button.setOnClickListener(new View.OnClickListener() {
@@ -89,17 +88,16 @@ public class Registration extends AppCompatActivity {
                 final String password_input = password.getText().toString();
 
 
-                if( isNameValid(name_input) == false)
-                {
-                    fullname.requestFocus();
-                    fullname.setError("Invalid Name");
-                }
+//                if(isNameValid(name_input) == false)
+//                {
+//                    fullname.requestFocus();
+//                    fullname.setError("Invalid Name");
+//                }
 
-                else if (isValid(email_input) == false) {
+                 if (isValid(email_input) == false) {
                     email.requestFocus();
                     email.setError("Invalid email");
                 }
-
                 else if(password_input.length() <=8)
                 {
                     password.requestFocus();
@@ -107,42 +105,33 @@ public class Registration extends AppCompatActivity {
 
                 }
                 else{
+                    StringRequest req = new StringRequest(Request.Method.POST, insertUrl, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                            Toast.makeText(Registration.this, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }) {
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("email", email.getText().toString());
+                            params.put("password", password.getText().toString());
+                            params.put("fullname", fullname.getText().toString());
+                            return params;
+                        }
+                    };
+                    rq.add(req);
 
                     Intent intent = new Intent(Registration.this, Log_in.class);
                     startActivity(intent);
                 }
             }
         });
-        request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try{
-                    JSONObject jsonObject = new JSONObject(response);
-                }
-                catch(JSONException e){
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                Log.d("error",error.toString());
-            }
-        }){
-            protected Map<String,String> getParams() throws AuthFailureError{
-                HashMap<String,String> hashmap = new HashMap <String,String>();
-                hashmap.put("Email",email.getText().toString());
-                hashmap.put("Name",fullname.getText().toString());
-                hashmap.put("Password",password.getText().toString());
-
-                return hashmap;
-            }
-
-        };
-    requestqueue.add(request);
-
 
 
     }

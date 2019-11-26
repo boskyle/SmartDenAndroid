@@ -5,4 +5,12 @@
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+
+    <style name="custom_fab">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/subBackground</item>
+
+    </style>
+
 </resources>

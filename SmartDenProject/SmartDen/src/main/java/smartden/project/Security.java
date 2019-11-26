@@ -29,6 +29,7 @@ public class Security extends AppCompatActivity {
         setContentView(R.layout.activity_security);
 
         ActionBar actionbar = getSupportActionBar();
+        getSupportActionBar().setTitle("Security");
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu1);
 
@@ -76,10 +77,7 @@ public class Security extends AppCompatActivity {
                                 intent = new Intent(Security.this, Sensors.class);
                                 startActivity(intent);
                                 break;
-                            case R.id.add_sensor:
-                                intent = new Intent(Security.this, Add_sensor.class);
-                                startActivity(intent);
-                                break;
+
                         }
                         return true;
                     }

@@ -97,6 +97,7 @@ protected  void requestCameraPermission ()
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         ActionBar actionbar = getSupportActionBar();
+        getSupportActionBar().setTitle("Add Sensor");
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu1);
 
@@ -160,9 +161,7 @@ protected  void requestCameraPermission ()
                                 intent = new Intent(Add_sensor.this, Sensors.class);
                                 startActivity(intent);
                                 break;
-                            case R.id.add_sensor:
-                                Toast.makeText(Add_sensor.this,"You are already in this activity silly!",Toast.LENGTH_SHORT).show();
-                                break;
+
                         }
                         return true;
                     }

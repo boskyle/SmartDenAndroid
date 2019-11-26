@@ -35,6 +35,7 @@ public class Garage extends AppCompatActivity {
 
 
         ActionBar actionbar = getSupportActionBar();
+        getSupportActionBar().setTitle("Garage");
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu1);
 
@@ -81,10 +82,7 @@ public class Garage extends AppCompatActivity {
                                 intent = new Intent(Garage.this, Sensors.class);
                                 startActivity(intent);
                                 break;
-                            case R.id.add_sensor:
-                                intent = new Intent(Garage.this, Add_sensor.class);
-                                startActivity(intent);
-                                break;
+
                         }
                         return true;
                     }

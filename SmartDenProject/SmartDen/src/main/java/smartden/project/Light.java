@@ -30,6 +30,7 @@ public class Light extends AppCompatActivity {
         setContentView(R.layout.activity_light);
 
         ActionBar actionbar = getSupportActionBar();
+        getSupportActionBar().setTitle("Light");
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu1);
 
@@ -77,10 +78,7 @@ public class Light extends AppCompatActivity {
                                 intent = new Intent(Light.this, Sensors.class);
                                 startActivity(intent);
                                 break;
-                            case R.id.add_sensor:
-                                intent = new Intent(Light.this, Add_sensor.class);
-                                startActivity(intent);
-                                break;
+
                         }
                         return true;
                     }

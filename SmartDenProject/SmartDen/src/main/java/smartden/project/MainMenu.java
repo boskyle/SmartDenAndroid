@@ -1,3 +1,4 @@
+/*Team Name: Humber Elites*/
 package smartden.project;
 
 import androidx.appcompat.app.ActionBar;
@@ -77,6 +78,10 @@ public class MainMenu extends AppCompatActivity {
                                 break;
                             case R.id.list_sensor:
                                 intent = new Intent(MainMenu.this, Sensors.class);
+                                startActivity(intent);
+                                break;
+                            case R.id.log_out:
+                                intent = new Intent(MainMenu.this, SplashActivity.class);
                                 startActivity(intent);
                                 break;
 

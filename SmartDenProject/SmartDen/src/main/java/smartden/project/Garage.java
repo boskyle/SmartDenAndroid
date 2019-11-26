@@ -1,3 +1,4 @@
+/*Team Name: Humber Elites*/
 package smartden.project;
 
 import androidx.appcompat.app.ActionBar;
@@ -80,6 +81,10 @@ public class Garage extends AppCompatActivity {
                                 break;
                             case R.id.list_sensor:
                                 intent = new Intent(Garage.this, Sensors.class);
+                                startActivity(intent);
+                                break;
+                            case R.id.log_out:
+                                intent = new Intent(Garage.this, SplashActivity.class);
                                 startActivity(intent);
                                 break;
 

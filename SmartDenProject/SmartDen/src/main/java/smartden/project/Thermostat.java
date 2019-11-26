@@ -1,3 +1,4 @@
+/*Team Name: Humber Elites*/
 package smartden.project;
 
 import androidx.appcompat.app.ActionBar;
@@ -112,6 +113,10 @@ public class Thermostat extends AppCompatActivity {
 
                             case R.id.security:
                                 intent = new Intent(Thermostat.this, Security.class);
+                                startActivity(intent);
+                                break;
+                            case R.id.log_out:
+                                intent = new Intent(Thermostat.this, SplashActivity.class);
                                 startActivity(intent);
                                 break;
 

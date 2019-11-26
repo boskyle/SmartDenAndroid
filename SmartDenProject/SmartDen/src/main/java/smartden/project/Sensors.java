@@ -87,6 +87,10 @@ public class Sensors extends AppCompatActivity {
                                 intent = new Intent(Sensors.this, Sensors.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.log_out:
+                                intent = new Intent(Sensors.this, SplashActivity.class);
+                                startActivity(intent);
+                                break;
                         }
                         return true;
                     }

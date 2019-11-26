@@ -41,6 +41,12 @@
             android:title="Sensors"
             android:textStyle="bold"/>
 
+        <item
+            android:id="@+id/log_out"
+            android:icon ="@drawable/door"
+            android:title="Log Out"
+            android:textStyle="bold"/>
+
 
 
 

@@ -78,6 +78,10 @@ public class Light extends AppCompatActivity {
                                 intent = new Intent(Light.this, Sensors.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.log_out:
+                                intent = new Intent(Light.this, SplashActivity.class);
+                                startActivity(intent);
+                                break;
 
                         }
                         return true;

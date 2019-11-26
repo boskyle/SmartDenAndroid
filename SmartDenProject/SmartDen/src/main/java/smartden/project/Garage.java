@@ -82,6 +82,10 @@ public class Garage extends AppCompatActivity {
                                 intent = new Intent(Garage.this, Sensors.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.log_out:
+                                intent = new Intent(Garage.this, SplashActivity.class);
+                                startActivity(intent);
+                                break;
 
                         }
                         return true;

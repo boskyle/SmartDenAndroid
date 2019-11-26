@@ -161,6 +161,10 @@ protected  void requestCameraPermission ()
                                 intent = new Intent(Add_sensor.this, Sensors.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.log_out:
+                                intent = new Intent(Add_sensor.this, SplashActivity.class);
+                                startActivity(intent);
+                                break;
 
                         }
                         return true;

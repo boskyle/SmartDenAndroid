@@ -79,6 +79,10 @@ public class MainMenu extends AppCompatActivity {
                                 intent = new Intent(MainMenu.this, Sensors.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.log_out:
+                                intent = new Intent(MainMenu.this, SplashActivity.class);
+                                startActivity(intent);
+                                break;
 
                         }
                         return true;

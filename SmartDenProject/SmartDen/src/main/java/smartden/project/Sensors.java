@@ -4,25 +4,40 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Sensors extends AppCompatActivity {
 
     private DrawerLayout mDrawerLayout;
+
+    private ArrayList<Sensor_Info>  sensorList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private SensorAdapter mAdapter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensors);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         ActionBar actionbar = getSupportActionBar();
+        getSupportActionBar().setTitle("My Sensor");
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu1);
 
@@ -103,7 +118,55 @@ public class Sensors extends AppCompatActivity {
                     }
                 }
         );
+
+        FloatingActionButton fab1 = findViewById(R.id.action1);
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Sensors.this, Add_sensor.class);
+
+                startActivity(intent);
+            }
+        });
+
+        recyclerView = (RecyclerView) findViewById(R.id.add_sensor_recycleview);
+        mAdapter = new SensorAdapter(sensorList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+
+        prepareSensorData();
+
     }
+
+    private void prepareSensorData() {
+
+
+
+    Sensor_Info sensor = new Sensor_Info();
+    sensor.setname("Garage");
+    sensor.setlocation("Kitchen");
+    sensor.setUid(3);
+    sensor.setqrcode("DAWIAWDHIAHWD123");
+    sensorList.add(sensor);
+
+        Sensor_Info sensor1 = new Sensor_Info();
+        sensor1.setname("Light");
+        sensor1.setlocation("BedRoom");
+        sensor1.setUid(4);
+        sensor1.setqrcode("ADWUYGWDUAWBD");
+        sensorList.add(sensor1);
+
+    mAdapter.notifyDataSetChanged();
+
+    }
+
+
+
+
+
+
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

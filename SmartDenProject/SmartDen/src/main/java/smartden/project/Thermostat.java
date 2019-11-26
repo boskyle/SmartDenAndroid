@@ -62,6 +62,7 @@ public class Thermostat extends AppCompatActivity {
         setContentView(R.layout.activity_thermostat);
 
         ActionBar actionbar = getSupportActionBar();
+        getSupportActionBar().setTitle("Thermostat");
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu1);
 
@@ -113,10 +114,7 @@ public class Thermostat extends AppCompatActivity {
                                 intent = new Intent(Thermostat.this, Security.class);
                                 startActivity(intent);
                                 break;
-                            case R.id.add_sensor:
-                                intent = new Intent(Thermostat.this, Add_sensor.class);
-                                startActivity(intent);
-                                break;
+
                         }
                         return true;
                     }

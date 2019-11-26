@@ -29,6 +29,7 @@ public class MainMenu extends AppCompatActivity {
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         ActionBar actionbar = getSupportActionBar();
+        getSupportActionBar().setTitle("Smart Den");
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu1);
 
@@ -78,10 +79,7 @@ public class MainMenu extends AppCompatActivity {
                                 intent = new Intent(MainMenu.this, Sensors.class);
                                 startActivity(intent);
                                 break;
-                            case R.id.add_sensor:
-                                intent = new Intent(MainMenu.this, Add_sensor.class);
-                                startActivity(intent);
-                                break;
+
                         }
                         return true;
                     }

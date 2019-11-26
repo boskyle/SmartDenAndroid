@@ -43,7 +43,7 @@
             app:layout_constraintVertical_bias="0.441" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btn_reg"
             android:layout_width="170dp"
             android:layout_height="42dp"
             android:text="Register Sensor"
@@ -69,6 +69,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.556"
             app:srcCompat="@android:drawable/ic_menu_camera"/>
+
+        <TextView
+            android:id="@+id/tv_temp"
+            android:layout_width="178dp"
+            android:layout_height="95dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.768" />
 
 
         <!--       Boswel code here   -->

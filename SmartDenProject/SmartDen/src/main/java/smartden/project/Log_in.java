@@ -99,7 +99,19 @@ public class Log_in extends AppCompatActivity {
                                 for (int i=0;i<sd_users.length();i++)
                                 {
                                     JSONObject user = sd_users.getJSONObject(i);
-                                    String email = user.getString("email");
+                                    String mEmail = user.getString("email");
+                                    String mPass = user.getString("password");
+
+                                        if(email_input.equalsIgnoreCase(mEmail) && password_input.equalsIgnoreCase(mPass)) {
+
+                                            Intent intent = new Intent(Log_in.this, MainMenu.class);
+                                            startActivity(intent);
+                                            Toast.makeText(Log_in.this, "Welcome", Toast.LENGTH_LONG).show();
+                                        } if (!(email_input.equalsIgnoreCase(mEmail)) && !(password_input.equalsIgnoreCase(mPass)))
+                                        {Toast.makeText(Log_in.this,"User not Authenticated",Toast.LENGTH_LONG).show();}
+
+
+
                                 }
 
 
@@ -117,15 +129,14 @@ public class Log_in extends AppCompatActivity {
                     rq.add(req);
 
 
-                    Intent intent = new Intent(Log_in.this, MainMenu.class);
-                    startActivity(intent);
+                   // Intent intent = new Intent(Log_in.this, MainMenu.class);
+                    //startActivity(intent);
                 } // end of else
 
 
 
          //// This code below is for testing, when you are done testing, delete the code below and replace it with code above ( the one I commented out)
-//                Intent intent = new Intent(Log_in.this, MainMenu.class);
-//                startActivity(intent);
+//
         //// This is for testing only
 
 

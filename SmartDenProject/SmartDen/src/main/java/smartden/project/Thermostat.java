@@ -119,6 +119,10 @@ public class Thermostat extends AppCompatActivity {
                                 intent = new Intent(Thermostat.this, SplashActivity.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.setting:
+                                intent = new Intent(Thermostat.this, Setting.class);
+                                startActivity(intent);
+                                break;
 
                         }
                         return true;

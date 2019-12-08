@@ -92,6 +92,10 @@ public class Sensors extends AppCompatActivity {
                                 intent = new Intent(Sensors.this, SplashActivity.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.setting:
+                                intent = new Intent(Sensors.this, Setting.class);
+                                startActivity(intent);
+                                break;
                         }
                         return true;
                     }
@@ -148,7 +152,7 @@ public class Sensors extends AppCompatActivity {
     private void prepareSensorData() {
 
 
-
+//// Pull information from the database
     Sensor_Info sensor = new Sensor_Info();
     sensor.setname("Garage");
     sensor.setlocation("Kitchen");

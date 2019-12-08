@@ -87,6 +87,10 @@ public class Garage extends AppCompatActivity {
                                 intent = new Intent(Garage.this, SplashActivity.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.setting:
+                                intent = new Intent(Garage.this, Setting.class);
+                                startActivity(intent);
+                                break;
 
                         }
                         return true;

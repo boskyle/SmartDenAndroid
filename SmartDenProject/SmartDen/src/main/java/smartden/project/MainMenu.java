@@ -84,6 +84,10 @@ public class MainMenu extends AppCompatActivity {
                                 intent = new Intent(MainMenu.this, SplashActivity.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.setting:
+                                intent = new Intent(MainMenu.this, Setting.class);
+                                startActivity(intent);
+                                break;
 
                         }
                         return true;

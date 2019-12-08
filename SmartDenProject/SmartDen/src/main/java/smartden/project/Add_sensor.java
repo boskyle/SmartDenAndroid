@@ -262,6 +262,10 @@ public void scanQRCode(View view)
                                 intent = new Intent(Add_sensor.this, SplashActivity.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.setting:
+                                intent = new Intent(Add_sensor.this, Setting.class);
+                                startActivity(intent);
+                                break;
 
                         }
                         return true;

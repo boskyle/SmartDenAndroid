@@ -82,6 +82,10 @@ public class Security extends AppCompatActivity {
                                 intent = new Intent(Security.this, SplashActivity.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.setting:
+                                intent = new Intent(Security.this, Setting.class);
+                                startActivity(intent);
+                                break;
 
                         }
                         return true;

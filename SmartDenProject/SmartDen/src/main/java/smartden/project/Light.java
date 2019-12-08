@@ -83,6 +83,10 @@ public class Light extends AppCompatActivity {
                                 intent = new Intent(Light.this, SplashActivity.class);
                                 startActivity(intent);
                                 break;
+                            case R.id.setting:
+                                intent = new Intent(Light.this, Setting.class);
+                                startActivity(intent);
+                                break;
 
                         }
                         return true;

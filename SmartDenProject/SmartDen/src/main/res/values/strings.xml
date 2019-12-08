@@ -16,8 +16,7 @@
     <string name="menu_send">Send</string>
 
 
-
-<!--This array is used for the add sensor selection spinner in the Add_sensor class-->
+    <!--This array is used for the add sensor selection spinner in the Add_sensor class-->
 
     <string-array name="list_of_sensors">
         <item>DHT-11 (Temperature and Humidity Sensor)</item>

@@ -72,8 +72,8 @@ public class Log_in extends AppCompatActivity {
             public void onClick(View v) {
                 email= (EditText)findViewById(R.id.editText);
                 password = (EditText)findViewById(R.id.editText2);
-                final String password_input = password.getText().toString();
-                final String email_input = email.getText().toString();
+                  final String password_input = password.getText().toString();
+                  final String email_input = email.getText().toString();
 
                 if (isValid(email_input) == false) {
                     email.requestFocus();
@@ -96,11 +96,27 @@ public class Log_in extends AppCompatActivity {
                         {
                             try {
                                 JSONArray sd_users = response.getJSONArray("SDusers");
-                                for (int i=0;i<sd_users.length();i++)
-                                {
+                                for (int i=0;i<sd_users.length();i++) {
                                     JSONObject user = sd_users.getJSONObject(i);
-                                    String email = user.getString("email");
+                                    String mEmail = user.getString("email");
+                                    String mPass = user.getString("password");
+
+                                    if (email_input.equalsIgnoreCase(mEmail) && password_input.equalsIgnoreCase(mPass)) {
+                                        Toast.makeText(Log_in.this, "Welcome", Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(Log_in.this, MainMenu.class);
+                                        startActivity(intent);
+
+                                    }
+                                    else  {
+
+                                        email.requestFocus();
+                                        password.requestFocus();
+
+                                    }
                                 }
+
+
+
 
 
 
@@ -117,15 +133,14 @@ public class Log_in extends AppCompatActivity {
                     rq.add(req);
 
 
-                    Intent intent = new Intent(Log_in.this, MainMenu.class);
-                    startActivity(intent);
+                   // Intent intent = new Intent(Log_in.this, MainMenu.class);
+                    //startActivity(intent);
                 } // end of else
 
 
 
          //// This code below is for testing, when you are done testing, delete the code below and replace it with code above ( the one I commented out)
-//                Intent intent = new Intent(Log_in.this, MainMenu.class);
-//                startActivity(intent);
+//
         //// This is for testing only
 
 

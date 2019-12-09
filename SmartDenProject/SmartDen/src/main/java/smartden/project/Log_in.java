@@ -101,18 +101,21 @@ public class Log_in extends AppCompatActivity {
                                     String mEmail = user.getString("email");
                                     String mPass = user.getString("password");
 
-                                    if (email_input.equalsIgnoreCase(mEmail) && password_input.equalsIgnoreCase(mPass)) {
+                                    if (email_input.equalsIgnoreCase(mEmail) & password_input.equalsIgnoreCase(mPass)) {
                                         Toast.makeText(Log_in.this, "Welcome", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(Log_in.this, MainMenu.class);
                                         startActivity(intent);
+                                        break;
 
                                     }
-                                    else  {
-
-                                        email.requestFocus();
-                                        password.requestFocus();
-
+                                    else {
+                                        Toast.makeText(Log_in.this, "User not Authenticated", Toast.LENGTH_LONG).show();
                                     }
+
+
+
+
+
                                 }
 
 

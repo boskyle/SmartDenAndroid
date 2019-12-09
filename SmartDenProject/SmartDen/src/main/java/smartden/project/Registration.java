@@ -31,6 +31,7 @@ public class Registration extends AppCompatActivity {
     EditText email;
     EditText password;
     EditText fullname;
+    EditText re_enter_password;
 
     /*Connections DB*/
     RequestQueue rq;
@@ -94,6 +95,9 @@ public class Registration extends AppCompatActivity {
                 email = (EditText)findViewById(R.id.emailtext);
                 final String email_input = email.getText().toString();
 
+                re_enter_password =(EditText)findViewById(R.id.passwordtext2);
+                final String retype_password = re_enter_password.getText().toString();
+
 
                 password = (EditText)findViewById(R.id.passwordtext);
                 final String password_input = password.getText().toString();
@@ -113,6 +117,12 @@ public class Registration extends AppCompatActivity {
                 {
                     password.requestFocus();
                     password.setError("Must password must contain at least 8 characters");
+
+                }
+                if(!(password_input.equals(re_enter_password.getText().toString()))){
+
+                    re_enter_password.requestFocus();
+                    re_enter_password.setError("Password does not match");
 
                 }
                 else{
@@ -138,6 +148,7 @@ public class Registration extends AppCompatActivity {
                     };
                     rq.add(req);
 
+                    Toast.makeText(Registration.this, "Registration Successfully", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(Registration.this, Log_in.class);
                     startActivity(intent);
                 }

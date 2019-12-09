@@ -6,7 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -19,6 +22,9 @@ public class MainMenu extends AppCompatActivity {
 
 
     private DrawerLayout mDrawerLayout;
+    String theme;
+
+    @SuppressLint("ResourceAsColor")
     @Override
 
 
@@ -120,6 +126,14 @@ public class MainMenu extends AppCompatActivity {
                     }
                 }
         );
+
+
+
+
+
+
+
+
 
     }
 

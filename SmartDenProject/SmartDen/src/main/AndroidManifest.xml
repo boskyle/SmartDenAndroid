@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Add_sensor"></activity>
+        <activity android:name=".Setting" />
         <activity android:name=".Sensors" />
         <activity android:name=".Security" />
         <activity android:name=".Light" />

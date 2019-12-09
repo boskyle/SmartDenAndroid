@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,6 +50,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+
+
+
+    final String temp22 = Log_in.mUid;
 
 
 
@@ -319,10 +325,14 @@ public void scanQRCode(View view)
 
         tv_temp = (TextView) findViewById(R.id.tv_temp);
 
+
+
+
+
         rg_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Add_sensor.this,poly_serial,Toast.LENGTH_SHORT).show();
+                Toast.makeText(Add_sensor.this,poly_serial +temp22,Toast.LENGTH_SHORT).show();
                 checkDHTCodes();
             }
         });
@@ -420,9 +430,7 @@ public void scanQRCode(View view)
                                 JSONObject serial_code = dht_codes_array.getJSONObject(i);
                                 if (serial_code.getString(poly_serial).trim().equalsIgnoreCase(sc_et))
                                 {
-                                    tv_temp.setText("Code: "+sc_et+" exists");
-
-
+                                    //tv_temp.setText("Code: "+sc_et+" exists");
 
 
                                     StringRequest req2 = new StringRequest(Request.Method.POST, eliminateDHTUrl, new Response.Listener<String>() {
@@ -444,28 +452,30 @@ public void scanQRCode(View view)
                                             String temp = code.getText().toString();
 
                                             if (ifSensor.equalsIgnoreCase("dht_pick")) {
+                                                params.put("user_id",temp22);
                                                 params.put("used", temp);
                                                 params.put("dhtC","dht_pick");
                                                 params.put("poly",poly_serial);
                                                 params.put("poly_two","DHT_CODES");
 
-
-
                                             }
 
                                             if (ifSensor.equalsIgnoreCase("hcs_pick")) {
+                                                params.put("user_id",temp22);
                                                 params.put("used", temp);
                                                 params.put("hcsC","hcs_pick");
                                                 params.put("poly",poly_serial);
                                                 params.put("poly_two","HCS_CODES");
                                             }
                                             if (ifSensor.equalsIgnoreCase("rgb_pick")) {
+                                                params.put("user_id",temp22);
                                                 params.put("used", temp);
                                                 params.put("rgbC","rgb_pick");
                                                 params.put("poly",poly_serial);
                                                 params.put("poly_two","RGB_CODES");
                                             }
                                             if (ifSensor.equalsIgnoreCase("motor_pick")) {
+                                                params.put("user_id",temp22);
                                                 params.put("used", temp);
                                                 params.put("motorC","motor_pick");
                                                 params.put("poly",poly_serial);

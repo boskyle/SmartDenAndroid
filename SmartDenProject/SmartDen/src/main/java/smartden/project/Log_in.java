@@ -25,6 +25,7 @@ import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
+
 public class Log_in extends AppCompatActivity {
 
     EditText email;
@@ -33,6 +34,9 @@ public class Log_in extends AppCompatActivity {
     String showUrl="http://boswellkyle.com/ceng319_smartden/check2.php";
 
     RequestQueue rq;
+
+
+    public static String mUid;
 
     public static boolean isValid(String email)
     {
@@ -46,6 +50,15 @@ public class Log_in extends AppCompatActivity {
             return false;
         return pat.matcher(email).matches();
     }
+
+//    public String getmUid()
+//    {
+//        return this.mUid;
+//    }
+
+
+
+
 
 
     @Override
@@ -101,21 +114,25 @@ public class Log_in extends AppCompatActivity {
                                     String mEmail = user.getString("email");
                                     String mPass = user.getString("password");
 
-                                    if (email_input.equalsIgnoreCase(mEmail) & password_input.equalsIgnoreCase(mPass)) {
+
+                                    if (email_input.equalsIgnoreCase(mEmail) && password_input.equalsIgnoreCase(mPass)) {
+                                        mUid = user.getString("uid");
                                         Toast.makeText(Log_in.this, "Welcome", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(Log_in.this, MainMenu.class);
                                         startActivity(intent);
-                                        break;
+
+
+
+
+
+
+                                    }
+                                    else  {
+
+                                        email.requestFocus();
+                                        password.requestFocus();
 
                                     }
-                                    else {
-                                        Toast.makeText(Log_in.this, "User not Authenticated", Toast.LENGTH_LONG).show();
-                                    }
-
-
-
-
-
                                 }
 
 

@@ -153,19 +153,19 @@ public class Sensors extends AppCompatActivity {
 
 
 //// Pull information from the database
-    Sensor_Info sensor = new Sensor_Info();
-    sensor.setname("Garage");
-    sensor.setlocation("Kitchen");
-    sensor.setUid(3);
-    sensor.setqrcode("DAWIAWDHIAHWD123");
-    sensorList.add(sensor);
-
-        Sensor_Info sensor1 = new Sensor_Info();
-        sensor1.setname("Light");
-        sensor1.setlocation("BedRoom");
-        sensor1.setUid(4);
-        sensor1.setqrcode("ADWUYGWDUAWBD");
-        sensorList.add(sensor1);
+//    Sensor_Info sensor = new Sensor_Info();
+//    sensor.setname("Garage");
+//    sensor.setlocation("Kitchen");
+//    sensor.setUid(3);
+//    sensor.setqrcode("DAWIAWDHIAHWD123");
+//    sensorList.add(sensor);
+//
+//        Sensor_Info sensor1 = new Sensor_Info();
+//        sensor1.setname("Light");
+//        sensor1.setlocation("BedRoom");
+//        sensor1.setUid(4);
+//        sensor1.setqrcode("ADWUYGWDUAWBD");
+//        sensorList.add(sensor1);
 
     mAdapter.notifyDataSetChanged();
 

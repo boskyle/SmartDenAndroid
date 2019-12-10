@@ -332,7 +332,7 @@ public void scanQRCode(View view)
         rg_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Add_sensor.this,poly_serial +temp22,Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Add_sensor.this,poly_serial +temp22,Toast.LENGTH_SHORT).show();
                 checkDHTCodes();
             }
         });
@@ -452,6 +452,7 @@ public void scanQRCode(View view)
                                             String temp = code.getText().toString();
 
                                             if (ifSensor.equalsIgnoreCase("dht_pick")) {
+                                                params.put("s_name",sensor_name);
                                                 params.put("user_id",temp22);
                                                 params.put("used", temp);
                                                 params.put("dhtC","dht_pick");
@@ -461,6 +462,7 @@ public void scanQRCode(View view)
                                             }
 
                                             if (ifSensor.equalsIgnoreCase("hcs_pick")) {
+                                                params.put("s_name",sensor_name);
                                                 params.put("user_id",temp22);
                                                 params.put("used", temp);
                                                 params.put("hcsC","hcs_pick");
@@ -468,6 +470,7 @@ public void scanQRCode(View view)
                                                 params.put("poly_two","HCS_CODES");
                                             }
                                             if (ifSensor.equalsIgnoreCase("rgb_pick")) {
+                                                params.put("s_name",sensor_name);
                                                 params.put("user_id",temp22);
                                                 params.put("used", temp);
                                                 params.put("rgbC","rgb_pick");
@@ -475,6 +478,7 @@ public void scanQRCode(View view)
                                                 params.put("poly_two","RGB_CODES");
                                             }
                                             if (ifSensor.equalsIgnoreCase("motor_pick")) {
+                                                params.put("s_name",sensor_name);
                                                 params.put("user_id",temp22);
                                                 params.put("used", temp);
                                                 params.put("motorC","motor_pick");

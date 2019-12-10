@@ -13,9 +13,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +39,10 @@ public class Sensors extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SensorAdapter mAdapter;
 
+    String showUrl="http://boswellkyle.com/ceng319_smartden/display_sensors.php";
+    RequestQueue rq;
+
+    final String temp23 = Log_in.mUid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +51,8 @@ public class Sensors extends AppCompatActivity {
         setContentView(R.layout.activity_sensors);
 
         mDrawerLayout = findViewById(R.id.drawer_layout);
+
+        rq = Volley.newRequestQueue(Sensors.this);
 
         ActionBar actionbar = getSupportActionBar();
         getSupportActionBar().setTitle("My Sensor");
@@ -151,23 +168,55 @@ public class Sensors extends AppCompatActivity {
 
     private void prepareSensorData() {
 
+        Toast.makeText(Sensors.this,temp23,Toast.LENGTH_SHORT).show();
 
-//// Pull information from the database
-//    Sensor_Info sensor = new Sensor_Info();
-//    sensor.setname("Garage");
-//    sensor.setlocation("Kitchen");
-//    sensor.setUid(3);
-//    sensor.setqrcode("DAWIAWDHIAHWD123");
-//    sensorList.add(sensor);
-//
-//        Sensor_Info sensor1 = new Sensor_Info();
-//        sensor1.setname("Light");
-//        sensor1.setlocation("BedRoom");
-//        sensor1.setUid(4);
-//        sensor1.setqrcode("ADWUYGWDUAWBD");
-//        sensorList.add(sensor1);
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST,showUrl,null,new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response)
+            {
+                try {
+                    JSONArray listings = response.getJSONArray("sensor_listings");
+                    for (int i=0;i<listings.length();i++) {
+                        JSONObject user =listings.getJSONObject(i);
+                        String str_uid = user.getString("uid");
 
-    mAdapter.notifyDataSetChanged();
+                        if (str_uid.equalsIgnoreCase(temp23))
+                        {
+                            String str_sensor_code = user.getString("sensor_code");
+                            Sensor_Info sensor = new Sensor_Info();
+                            sensor.setname("");
+                            sensor.setlocation("");
+                            sensor.setUid(Integer.parseInt(str_uid));
+                            sensor.setqrcode(str_sensor_code);
+                            sensorList.add(sensor);
+                            mAdapter.notifyDataSetChanged();
+                        }
+
+
+                    }
+
+
+
+
+
+
+                } catch (JSONException e) {e.printStackTrace(); Toast.makeText(Sensors.this,e.getMessage(),Toast.LENGTH_SHORT).show();}
+
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(Sensors.this,error.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        rq.add(req);
+
+
+// Pull information from the database
+
+
+
 
     }
 

@@ -3,15 +3,11 @@ package smartden.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,19 +25,18 @@ import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
+
 public class Log_in extends AppCompatActivity {
 
-      EditText email;
-      EditText password;
-      CheckBox remember_me;
-    private SharedPreferences loginPreferences;
-    private SharedPreferences.Editor loginPrefsEditor;
-    private Boolean saveLogin;
-
+    EditText email;
+    EditText password;
 
     String showUrl="http://boswellkyle.com/ceng319_smartden/check2.php";
 
     RequestQueue rq;
+
+
+    public static String mUid;
 
     public static boolean isValid(String email)
     {
@@ -55,6 +50,15 @@ public class Log_in extends AppCompatActivity {
             return false;
         return pat.matcher(email).matches();
     }
+
+//    public String getmUid()
+//    {
+//        return this.mUid;
+//    }
+
+
+
+
 
 
     @Override
@@ -76,30 +80,11 @@ public class Log_in extends AppCompatActivity {
             }
         });
 
-
-        email= (EditText)findViewById(R.id.editText);
-        password = (EditText)findViewById(R.id.editText2);
-        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-        loginPrefsEditor = loginPreferences.edit();
-
-
-        remember_me = (CheckBox)findViewById(R.id.saveLoginCheckBox);
-        saveLogin = loginPreferences.getBoolean("saveLogin", false);
-        if (saveLogin == true) {
-            email.setText(loginPreferences.getString("username", ""));
-            password.setText(loginPreferences.getString("password", ""));
-            remember_me.setChecked(true);
-        }
-
-
-
-
         final Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-
-
+                email= (EditText)findViewById(R.id.editText);
+                password = (EditText)findViewById(R.id.editText2);
                   final String password_input = password.getText().toString();
                   final String email_input = email.getText().toString();
 
@@ -116,6 +101,8 @@ public class Log_in extends AppCompatActivity {
                 else {
 
 
+
+
                     JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST,showUrl,null,new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response)
@@ -127,32 +114,25 @@ public class Log_in extends AppCompatActivity {
                                     String mEmail = user.getString("email");
                                     String mPass = user.getString("password");
 
-                                    if (email_input.equalsIgnoreCase(mEmail) & password_input.equalsIgnoreCase(mPass)) {
-                                        if (remember_me.isChecked()) {
-                                            loginPrefsEditor.putBoolean("saveLogin", true);
-                                            loginPrefsEditor.putString("username", email_input);
-                                            loginPrefsEditor.putString("password", password_input);
-                                            loginPrefsEditor.commit();
-                                        } else {
-                                            loginPrefsEditor.clear();
-                                            loginPrefsEditor.commit();
-                                        }
+
+                                    if (email_input.equalsIgnoreCase(mEmail) && password_input.equalsIgnoreCase(mPass)) {
+                                        mUid = user.getString("uid");
                                         Toast.makeText(Log_in.this, "Welcome", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(Log_in.this, MainMenu.class);
                                         startActivity(intent);
-                                        break;
+
+
+
+
+
+
+                                    }
+                                    else  {
+
+                                        email.requestFocus();
+                                        password.requestFocus();
 
                                     }
-                                    else {
-
-                                        Toast.makeText(Log_in.this, "User not Authenticated", Toast.LENGTH_LONG).show();
-
-                                    }
-
-
-
-
-
                                 }
 
 
@@ -187,9 +167,6 @@ public class Log_in extends AppCompatActivity {
 
             }
         });
-
-
-
 
 
 

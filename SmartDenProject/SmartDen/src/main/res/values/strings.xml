@@ -25,4 +25,12 @@
         <item>ULN2003 (Motor)</item>
     </string-array>
 
+
+    <string-array name="list_of_location">
+        <item>Kitchen</item>
+        <item>Living Room</item>
+        <item>BedRoom</item>
+        <item>Garage</item>
+    </string-array>
+
 </resources>

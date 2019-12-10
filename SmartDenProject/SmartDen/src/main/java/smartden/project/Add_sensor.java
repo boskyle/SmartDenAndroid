@@ -61,6 +61,8 @@ public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemS
     /*Spinner*/
 
     Spinner spinner;
+
+
     EditText code;
     private DrawerLayout mDrawerLayout;
 

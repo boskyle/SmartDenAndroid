@@ -186,7 +186,7 @@ public class Sensors extends AppCompatActivity {
                             Sensor_Info sensor = new Sensor_Info();
                             sensor.setname("");
                             sensor.setlocation("");
-                            sensor.setUid(Integer.parseInt(str_uid));
+                            sensor.setUid( Integer.parseInt(str_uid));
                             sensor.setqrcode(str_sensor_code);
                             sensorList.add(sensor);
                             mAdapter.notifyDataSetChanged();

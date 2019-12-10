@@ -183,11 +183,13 @@ public class Sensors extends AppCompatActivity {
                         if (str_uid.equalsIgnoreCase(temp23))
                         {
                             String str_sensor_code = user.getString("sensor_code");
+                            String str_sensor_name = user.getString("sensor_name");
+                            String str_sensor_loc = user.getString("sensor_location");
                             Sensor_Info sensor = new Sensor_Info();
-                            sensor.setname("");
-                            sensor.setlocation("");
-                            sensor.setUid( Integer.parseInt(str_uid));
+                            sensor.setname(str_sensor_name);
                             sensor.setqrcode(str_sensor_code);
+                            sensor.setlocation(str_sensor_loc);
+                           // sensor.setUid( Integer.parseInt(str_uid));
                             sensorList.add(sensor);
                             mAdapter.notifyDataSetChanged();
                         }

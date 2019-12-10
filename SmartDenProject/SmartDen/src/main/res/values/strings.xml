@@ -19,10 +19,10 @@
     <!--This array is used for the add sensor selection spinner in the Add_sensor class-->
 
     <string-array name="list_of_sensors">
-        <item>DHT-11 (Temperature and Humidity Sensor)</item>
-        <item>HC-SR04 (Distance Sensor)</item>
-        <item>YSL-R59(RGB LED)</item>
-        <item>ULN2003 (Motor)</item>
+        <item>Temperatue and Humidity Sensor</item>
+        <item>Distance Sensor</item>
+        <item>RGB LED</item>
+        <item>Motor</item>
     </string-array>
 
 

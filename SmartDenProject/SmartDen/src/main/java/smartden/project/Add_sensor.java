@@ -325,6 +325,8 @@ public void scanQRCode(View view)
 
 
 
+
+
         /*code et*/
         code = findViewById(R.id.et_sensor_code);
 
@@ -372,12 +374,11 @@ public void scanQRCode(View view)
                {
                    case 0:
                        code.setHint("DHT-11 Code");
-                        sensor_name = "temperature&humidity sensor";
-                        ifSensor="dht_pick";
+                       sensor_name = "temperature&humidity sensor";
+                       ifSensor="dht_pick";
                        showUrl="http://boswellkyle.com/ceng319_smartden/show_dht11_codes.php";
                        jsn_arrays="jsn_dht_codes";
                        poly_serial="dht11_serial_code";
-
                        break;
 
                    case 1:
@@ -459,6 +460,7 @@ public void scanQRCode(View view)
                                             String temp = code.getText().toString();
 
                                             if (ifSensor.equalsIgnoreCase("dht_pick")) {
+                                                params.put("sensor_location",location);
                                                 params.put("s_name",sensor_name);
                                                 params.put("user_id",temp22);
                                                 params.put("used", temp);
@@ -468,7 +470,8 @@ public void scanQRCode(View view)
 
                                             }
 
-                                            if (ifSensor.equalsIgnoreCase("hcs_pick")) {
+                                            else if (ifSensor.equalsIgnoreCase("hcs_pick")) {
+                                                params.put("sensor_location",location);
                                                 params.put("s_name",sensor_name);
                                                 params.put("user_id",temp22);
                                                 params.put("used", temp);
@@ -476,7 +479,8 @@ public void scanQRCode(View view)
                                                 params.put("poly",poly_serial);
                                                 params.put("poly_two","HCS_CODES");
                                             }
-                                            if (ifSensor.equalsIgnoreCase("rgb_pick")) {
+                                          else  if (ifSensor.equalsIgnoreCase("rgb_pick")) {
+                                                params.put("sensor_location",location);
                                                 params.put("s_name",sensor_name);
                                                 params.put("user_id",temp22);
                                                 params.put("used", temp);
@@ -484,7 +488,8 @@ public void scanQRCode(View view)
                                                 params.put("poly",poly_serial);
                                                 params.put("poly_two","RGB_CODES");
                                             }
-                                            if (ifSensor.equalsIgnoreCase("motor_pick")) {
+                                           else  if (ifSensor.equalsIgnoreCase("motor_pick")) {
+                                                params.put("sensor_location",location);
                                                 params.put("s_name",sensor_name);
                                                 params.put("user_id",temp22);
                                                 params.put("used", temp);
@@ -492,15 +497,18 @@ public void scanQRCode(View view)
                                                 params.put("poly",poly_serial);
                                                 params.put("poly_two","ULN_CODES");
                                             }
+
                                             return params;
                                             }
                                     };
                                     rq2.add(req2);
                                     Toast.makeText(Add_sensor.this,"Request has been made",Toast.LENGTH_SHORT).show();
+                                    Intent myIntent = new Intent(Add_sensor.this, Sensors.class);
+                                    startActivity(myIntent);
 
                                 } // end of if statement
 
-                            }
+                            } // end of for loop (looping through json objects)
 
 
                         } catch (JSONException e) {e.printStackTrace(); Toast.makeText(Add_sensor.this,e.getMessage(),Toast.LENGTH_SHORT).show();}

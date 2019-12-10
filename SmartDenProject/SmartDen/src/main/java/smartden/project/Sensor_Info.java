@@ -14,18 +14,16 @@ public Sensor_Info(){
      sensor_name =" ";
      qrcode = " ";
      location = " ";
-     uid = 0;
-
-
+     //uid = 0;
 }
 
     public void setname(String name){
         this.sensor_name = name;
     }
 
-    public void setUid(int uid){
-        this.uid = uid;
-    }
+//    public void setUid(int uid){
+//        this.uid = uid;
+//    }
 
     public void setqrcode(String qr){
         this.qrcode = qr;
@@ -47,9 +45,9 @@ public Sensor_Info(){
         return location;
     }
 
-    public String getUid(){
-    return String.valueOf(uid);
-    }
+//    public String getUid(){
+//    return String.valueOf(uid);
+//    }
 
 
 }

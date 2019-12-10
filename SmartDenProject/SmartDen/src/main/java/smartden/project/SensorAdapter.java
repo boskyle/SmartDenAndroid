@@ -46,7 +46,7 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.MyViewHold
         holder.sensor_name.setText(sensor.getname());
         holder.qrcode.setText(sensor.getQrcode());
         holder.location.setText(sensor.getLocation());
-        holder.uid.setText(sensor.getUid());
+        //holder.uid.setText(sensor.getUid());
     }
 
     @Override

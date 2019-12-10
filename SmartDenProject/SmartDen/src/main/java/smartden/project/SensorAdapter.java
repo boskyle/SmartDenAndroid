@@ -23,7 +23,7 @@ public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.MyViewHold
             sensor_name = (TextView) view.findViewById(R.id.sensor_ID);
             qrcode = (TextView) view.findViewById(R.id.sensor_code);
             location = (TextView) view.findViewById(R.id.sensor_location);
-            uid = (TextView) view.findViewById(R.id.sensor_uiD);
+
         }
     }
 

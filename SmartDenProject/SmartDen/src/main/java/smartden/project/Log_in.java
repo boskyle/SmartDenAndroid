@@ -180,8 +180,7 @@ public class Log_in extends AppCompatActivity {
                     rq.add(req);
 
 
-                   // Intent intent = new Intent(Log_in.this, MainMenu.class);
-                    //startActivity(intent);
+
                 } // end of else
 
 

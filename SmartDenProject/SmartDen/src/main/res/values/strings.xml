@@ -14,12 +14,13 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="string1">Code</string>
 
 
     <!--This array is used for the add sensor selection spinner in the Add_sensor class-->
 
     <string-array name="list_of_sensors">
-        <item>Temperatue and Humidity Sensor</item>
+        <item>Temperature and Humidity Sensor</item>
         <item>Distance Sensor</item>
         <item>RGB LED</item>
         <item>Motor</item>

@@ -320,7 +320,7 @@ public void scanQRCode(View view)
         spinner.setAdapter(adapter);
 
         location_spinner = (Spinner) findViewById(R.id.spinner2);
-        location = location_spinner.getSelectedItem().toString();
+
 
 
 
@@ -458,6 +458,7 @@ public void scanQRCode(View view)
                                         protected Map<String, String> getParams() throws AuthFailureError {
                                             Map<String, String> params = new HashMap<String, String>();
                                             String temp = code.getText().toString();
+                                            location = location_spinner.getSelectedItem().toString();
 
                                             if (ifSensor.equalsIgnoreCase("dht_pick")) {
                                                 params.put("sensor_location",location);

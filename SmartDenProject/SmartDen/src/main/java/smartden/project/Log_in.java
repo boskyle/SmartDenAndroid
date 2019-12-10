@@ -4,10 +4,12 @@ package smartden.project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +36,10 @@ public class Log_in extends AppCompatActivity {
     String showUrl="http://boswellkyle.com/ceng319_smartden/check2.php";
 
     RequestQueue rq;
+    CheckBox remember_me;
+    private SharedPreferences loginPreferences;
+    private SharedPreferences.Editor loginPrefsEditor;
+    private Boolean saveLogin;
 
 
     public static String mUid;
@@ -80,6 +86,22 @@ public class Log_in extends AppCompatActivity {
             }
         });
 
+        email= (EditText)findViewById(R.id.editText);
+        password = (EditText)findViewById(R.id.editText2);
+        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        loginPrefsEditor = loginPreferences.edit();
+
+
+        remember_me = (CheckBox)findViewById(R.id.saveLoginCheckBox);
+        saveLogin = loginPreferences.getBoolean("saveLogin", false);
+        if (saveLogin == true) {
+            email.setText(loginPreferences.getString("username", ""));
+            password.setText(loginPreferences.getString("password", ""));
+            remember_me.setChecked(true);
+        }
+
+
+
         final Button button = findViewById(R.id.button);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -117,14 +139,19 @@ public class Log_in extends AppCompatActivity {
 
                                     if (email_input.equalsIgnoreCase(mEmail) && password_input.equalsIgnoreCase(mPass)) {
                                         mUid = user.getString("uid");
+                                        if (remember_me.isChecked()) {
+                                            loginPrefsEditor.putBoolean("saveLogin", true);
+                                            loginPrefsEditor.putString("username", email_input);
+                                            loginPrefsEditor.putString("password", password_input);
+                                            loginPrefsEditor.commit();
+                                        } else {
+                                            loginPrefsEditor.clear();
+                                            loginPrefsEditor.commit();
+                                        }
+
                                         Toast.makeText(Log_in.this, "Welcome", Toast.LENGTH_LONG).show();
                                         Intent intent = new Intent(Log_in.this, MainMenu.class);
                                         startActivity(intent);
-
-
-
-
-
 
                                     }
                                     else  {

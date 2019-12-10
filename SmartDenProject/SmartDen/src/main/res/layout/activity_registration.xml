@@ -133,6 +133,7 @@
         android:layout_marginBottom="5dp"
         android:background="@drawable/roundcorner"
         android:inputType="textPassword"
+        android:hint="**At least 8 characters**"
         app:layout_constraintBottom_toTopOf="@+id/reenter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

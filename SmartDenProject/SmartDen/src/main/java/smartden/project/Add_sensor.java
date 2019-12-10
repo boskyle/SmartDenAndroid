@@ -93,6 +93,8 @@ public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemS
     String ifSensor;
     String jsn_arrays;
     String poly_serial;
+    Spinner location_spinner;
+    String location;
 
 
 
@@ -316,6 +318,9 @@ public void scanQRCode(View view)
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Add_sensor.this,R.array.list_of_sensors,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        location_spinner = (Spinner) findViewById(R.id.spinner2);
+        location = location_spinner.getSelectedItem().toString();
 
 
 

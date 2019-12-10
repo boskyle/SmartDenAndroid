@@ -97,10 +97,10 @@
         android:layout_height="38dp"
         android:layout_marginStart="63dp"
         android:layout_marginEnd="63dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="19dp"
         android:background="@drawable/roundcorner"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/saveLoginCheckBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +113,7 @@
         android:layout_marginStart="88dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="88dp"
-        android:layout_marginBottom="85dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/round_corner2"
         android:text="Log in"
         android:textColor="@color/subBackground"
@@ -122,14 +122,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/saveLoginCheckBox" />
 
     <TextView
         android:id="@+id/lnkRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="86dp"
+        android:layout_marginBottom="37dp"
         android:gravity="center"
         android:text="New to SmartDen? Register here"
         android:textColor="@color/subBackground"
@@ -139,6 +139,22 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <CheckBox
+        android:id="@+id/saveLoginCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="20dp"
+        android:buttonTint="@color/subBackground"
+        android:text="Remember Me"
+        android:textColor="@color/subBackground"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

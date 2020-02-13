@@ -1,4 +1,5 @@
 /*Team Name: Humber Elites*/
+/*Testing 1.0.1 branch!!!!!!!!!!*/
 
 package smartden.project;
 
@@ -71,7 +72,6 @@ public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemS
     int CAMERA_PERMISSION_CODE = 1;
 
     /*QR Scan stuff*/
-
     private IntentIntegrator qrScan;
 
 

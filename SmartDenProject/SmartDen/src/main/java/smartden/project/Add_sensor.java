@@ -1,5 +1,5 @@
 /*Team Name: Humber Elites*/
-/*Testing 1.0.1 branch!!!!!!!!!!*/
+/*SmartDen App version 1.0.1! -Boswell Orendain */
 
 package smartden.project;
 

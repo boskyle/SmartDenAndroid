@@ -1,5 +1,6 @@
 /*Team Name: Humber Elites*/
-/*SmartDen App version 1.0.1! -Boswell Orendain */
+/*SmartDen feature branch edited*/
+/*Only use this branch to for new features for our application*/
 
 package smartden.project;
 
@@ -62,7 +63,6 @@ public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemS
     /*Spinner*/
 
     Spinner spinner;
-
 
     EditText code;
     private DrawerLayout mDrawerLayout;

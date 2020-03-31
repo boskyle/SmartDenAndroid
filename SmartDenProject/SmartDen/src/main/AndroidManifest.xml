@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA"/>
 
-    //declare that I am going to use the bluetooth permission
+<!--    //declare that I am going to use the bluetooth permission-->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
 
@@ -43,7 +43,5 @@
             </intent-filter>
         </activity>
     </application>
-
-
 
 </manifest>

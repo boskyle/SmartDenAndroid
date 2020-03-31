@@ -14,10 +14,12 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +53,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import smartden.project.json_rest.PullAvailable;
+
 public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
@@ -83,7 +87,7 @@ public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemS
 
 
     /**/
-    Button rg_btn;
+    Button scan;
     TextView tv_temp;
 
 
@@ -97,19 +101,29 @@ public class Add_sensor extends AppCompatActivity implements AdapterView.OnItemS
     String location;
 
 
+    PullAvailable pullMe;
 
 
 
     protected void init()
     {
-        if (ContextCompat.checkSelfPermission(Add_sensor.this, Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED)
-        {
-            Snackbar.make(findViewById(R.id.as_main),"Camera Permission Granted!",Snackbar.LENGTH_SHORT).show();
-            scanQRCode(findViewById(R.id.as_main));
-        }
 
-        else {requestCameraPermission();}
+        scan = (Button) findViewById(R.id.btn_scan);
+        scan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ContextCompat.checkSelfPermission(Add_sensor.this, Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_GRANTED)
+                {
+                    Snackbar.make(findViewById(R.id.as_main),"Camera Permission Granted!",Snackbar.LENGTH_SHORT).show();
+                    scanQRCode(findViewById(R.id.as_main));
+                }
+
+                else {requestCameraPermission();}
+
+            }
+        });
+
     }
 
 
@@ -164,14 +178,32 @@ public void scanQRCode(View view)
         {
             if(result.getContents() == null)
             {
-                Toast.makeText(Add_sensor.this,"Result not found",Toast.LENGTH_SHORT).show();
+                Toast.makeText(Add_sensor.this,"Result not found!!!",Toast.LENGTH_SHORT).show();
             }
             else
             {
 
 
-                    Snackbar.make(findViewById(R.id.as_main),"Code: "+result.getContents(),Snackbar.LENGTH_SHORT).show();
-                    code.setText(result.getContents());
+
+                    //Snackbar.make(findViewById(R.id.as_main),"Code: "+result.getContents(),Snackbar.LENGTH_SHORT).show();
+                    //code.setText(result.getContents());
+
+                    /*
+                    1. Get code from the scan => result.getContents();
+                    2. If code matches the jsn array elements in showAvailable.php..
+                    3. register it to the user.
+                     */
+
+
+                    pullMe = new PullAvailable();
+                    pullMe.setMyContext(Add_sensor.this);
+                    pullMe.setInflater(getLayoutInflater());
+                    pullMe.set_sp_layout(android.R.layout.simple_spinner_item);
+                    String qr_value = result.getContents();
+                    pullMe.setQr(qr_value);
+                    pullMe.pullAvailable();
+                    String temp = pullMe.get_qr_used();
+                    Snackbar.make(findViewById(R.id.as_main),"Code: "+temp,Snackbar.LENGTH_SHORT).show();
 
 
             }
@@ -206,22 +238,15 @@ public void scanQRCode(View view)
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setItemIconTintList(null);
 
-        v = findViewById(R.id.iv_scan);
-
-        v.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                    Snackbar.make(findViewById(R.id.as_main),"Scan",Snackbar.LENGTH_SHORT).show();
-                    init();
-            }
-        });
-
 
         qrScan = new IntentIntegrator(Add_sensor.this);
 
         rq = Volley.newRequestQueue(Add_sensor.this);
         rq2 = Volley.newRequestQueue(Add_sensor.this);
+
+        /*getting the context for the toast message in PullAvailable.class*/
+        //pullMe.setMyContext(Add_sensor.this);
+        init();
 
 
 
@@ -312,43 +337,6 @@ public void scanQRCode(View view)
 
 
 
-        /*Spinner logic*/
-        spinner = (Spinner) findViewById(R.id.spn_sensors);
-        spinner.setOnItemSelectedListener(Add_sensor.this);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Add_sensor.this,R.array.list_of_sensors,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        location_spinner = (Spinner) findViewById(R.id.spinner2);
-
-
-
-
-
-
-
-        /*code et*/
-        code = findViewById(R.id.et_sensor_code);
-
-        rg_btn = (Button) findViewById(R.id.btn_reg);
-
-        tv_temp = (TextView) findViewById(R.id.tv_temp);
-
-
-
-
-
-        rg_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Toast.makeText(Add_sensor.this,poly_serial +temp22,Toast.LENGTH_SHORT).show();
-                checkDHTCodes();
-            }
-        });
-
-
-
-
 
     } // end of onCreate
 
@@ -367,11 +355,13 @@ public void scanQRCode(View view)
 
 
 
+    /*This is a spinner =>  + action listener and changes string variables depending on the selection*/
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
     {
                switch (position)
                {
+                   //not working! fix pls case 0
                    case 0:
                        code.setHint("DHT-11 Code");
                        sensor_name = "temperature&humidity sensor";
@@ -421,7 +411,9 @@ public void scanQRCode(View view)
     {
 
 
-        JsonObjectRequest req = new JsonObjectRequest
+                JsonObjectRequest req = new JsonObjectRequest
+
+                /*showUrl varies on the spinner selection*/
                 (Request.Method.GET, showUrl, null, new Response.Listener<JSONObject>() {
 
 
@@ -429,13 +421,16 @@ public void scanQRCode(View view)
                     public void onResponse(JSONObject response)
                     {
                         try {
+                            /*retreiving the json array of serial codes (**This changes also depending on the selection of the spinner**)*/
                             JSONArray dht_codes_array = response.getJSONArray(jsn_arrays);
                              sc_et = code.getText().toString();
 
 
                             for (int i=0;i<dht_codes_array.length();i++)
                             {
+                                /*iterating through individual elements inside the array from beginning to last*/
                                 JSONObject serial_code = dht_codes_array.getJSONObject(i);
+
                                 if (serial_code.getString(poly_serial).trim().equalsIgnoreCase(sc_et))
                                 {
                                     //tv_temp.setText("Code: "+sc_et+" exists");

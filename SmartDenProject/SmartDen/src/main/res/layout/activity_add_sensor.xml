@@ -17,125 +17,49 @@
         android:layout_height="match_parent">
 
 
-        <!--        Boswel code here    -->
-
-        <Spinner
-            android:id="@+id/spn_sensors"
-            android:layout_width="338dp"
-            android:layout_height="54dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.124" />
-
-        <EditText
-            android:id="@+id/et_sensor_code"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/string1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.441" />
-
-        <Button
-            android:id="@+id/btn_reg"
-            android:layout_width="170dp"
-            android:layout_height="42dp"
-            android:text="Register Sensor"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.907" />
-
+        <!--        Boswell code here    -->
 
 
         <ImageView
-            android:id="@+id/iv_scan"
-            android:layout_width="62dp"
-            android:layout_height="75dp"
-            android:layout_marginEnd="88dp"
-            android:onClick="cameraScan"
+            android:id="@+id/imageView5"
+            android:layout_width="253dp"
+            android:layout_height="314dp"
+            android:src="@drawable/qr_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.556"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
-
-        <TextView
-            android:id="@+id/tv_temp"
-            android:layout_width="178dp"
-            android:layout_height="95dp"
-            android:text=""
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.768" />
+            app:layout_constraintVertical_bias="0.393" />
 
         <TextView
             android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="43dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="230dp"
-            android:layout_marginBottom="23dp"
-            android:text="Choose Sensor"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/spn_sensors"
+            android:layout_width="348dp"
+            android:layout_height="117dp"
+            android:text="Register your sensor to your account with the QR-code that comes with the module."
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.396"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.631" />
+            app:layout_constraintVertical_bias="0.053" />
 
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="46dp"
-            android:layout_marginTop="29dp"
-            android:layout_marginEnd="285dp"
-            android:layout_marginBottom="105dp"
-            android:text="Location"
+        <Button
+            android:id="@+id/btn_scan"
+            android:layout_width="333dp"
+            android:layout_height="77dp"
+            android:background="@drawable/custom_button"
+            android:text="Scan"
+            android:textAllCaps="false"
             android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/et_sensor_code"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.512"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spn_sensors" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.788" />
 
 
-        <Spinner
-            android:id="@+id/spinner2"
-            android:layout_width="152dp"
-            android:layout_height="26dp"
-            android:layout_marginStart="29dp"
-            android:layout_marginTop="31dp"
-            android:layout_marginEnd="104dp"
-            android:layout_marginBottom="108dp"
-
-            android:entries="@array/list_of_location"
-            app:layout_constraintBottom_toTopOf="@+id/et_sensor_code"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView16"
-            app:layout_constraintTop_toBottomOf="@+id/spn_sensors" />
-
-
-
-
-
-        <!--       Boswel code here   -->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
